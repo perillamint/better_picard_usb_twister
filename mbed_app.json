@@ -1,0 +1,20 @@
+{
+    "config": {
+        "thread_stack_size": {
+          "value": 1024
+        },
+        "main_stack_size": {
+          "value": 1024
+        }
+    },
+    "macros": [
+    ],
+    "target_overrides": {
+        "*": {
+            "platform.stdio-baud-rate"          : 115200,
+            "platform.stdio-convert-newlines"   : true,
+            "platform.stdio-buffered-serial"    : true,
+            "platform.stdio-flush-at-exit"      : true
+        }
+    }
+}

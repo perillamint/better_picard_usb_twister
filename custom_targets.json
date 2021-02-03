@@ -1,0 +1,19 @@
+{
+    "STM32F103UNO": {
+        "inherits": [
+            "MCU_STM32F103xB"
+        ],
+        "macros_add": [
+            "STM32F103RB",
+            "CLOCK_SOURCE_USB",
+            "HSE_VALUE=8000000"
+        ],
+        "device_has_add": [
+            "USBDEVICE"
+        ],
+        "overrides": {
+            "clock_source": "USE_PLL_HSE_XTAL"
+        },
+        "device_name": "STM32F103RB"
+    }
+}
