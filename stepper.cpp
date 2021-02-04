@@ -28,6 +28,7 @@ void Stepper::disable() {
 
 void Stepper::reset() {
     this -> offset = 0;
+    this -> destOffset = 0;
 }
 
 void Stepper::step(uint8_t dir, uint8_t speed) {

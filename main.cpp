@@ -20,7 +20,7 @@ DigitalOut led(PC_12);
 // 0x00 - Halt
 // 0x01, magic -32768 - Set zero
 
-Stepper stepper0(D8, D6, D7);
+Stepper stepper0(D8, D7, D6);
 //Stepper stepper1(D12, D5, D4);
 
 Thread reportThread;
@@ -40,14 +40,14 @@ void reportThreadMain() {
         if (stepper0.isContMode()) {
             output_report.data[0] += 0x0a;
         } else if (stepper0.isMoving()) {
-            output_report.data[0] = 0x09;
+            output_report.data[0] += 0x09;
         } else {
-            output_report.data[0] = 0x00;
+            output_report.data[0] += 0x00;
         }
         int16_t curpos = stepper0.getOffset();
         memcpy(&(output_report.data[1]), &curpos, 2);
         hid.send(&output_report);
-        ThisThread::sleep_for(500ms);
+        ThisThread::sleep_for(10ms);
     }
 }
 
@@ -69,6 +69,7 @@ void commandThreadMain() {
         int16_t pos = (int16_t)((uint16_t)(command.data[2] << 8) + command.data[1]);
 
         stepper0.setSpeed(spd);
+        printf("spd: %u", spd);
         switch (cmd) {
             case 0x08:
             if (pos == -32768) {
@@ -80,6 +81,7 @@ void commandThreadMain() {
             break;
             case 0x0a:
             if (pos == -32768) {
+                // Cont -
                 stepper0.setContMode(0);
             } else {
                 //WTF?
