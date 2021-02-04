@@ -11,6 +11,9 @@
         "device_has_add": [
             "USBDEVICE"
         ],
+        "supported_form_factors": [
+            "ARDUINO"
+        ],
         "overrides": {
             "clock_source": "USE_PLL_HSE_XTAL"
         },
